@@ -10,7 +10,9 @@ import { clerkMiddleware } from "@clerk/express";
 import fs from "fs";
 import path from "path";
 import clerkWebhook from "./webhooks/clerk.webhook.js";
+import job from "./lib/cron.js";
 dotenv.config();
+
 
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
