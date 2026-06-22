@@ -12,6 +12,8 @@ import path from "path";
 import clerkWebhook from "./webhooks/clerk.webhook.js";
 import job from "./lib/cron.js";
 import authRoutes from "./routes/auth.route.js";
+import messageRoutes from "./routes/message.route.js";
+import { sendMessage } from "./controllers/message.controller.js";
 dotenv.config();
 
 
@@ -34,6 +36,8 @@ app.get("/health", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/messages", messageRoutes);
+
 
 if(fs.existsSync(publicDir)) {
   app.use(express.static(publicDir));
