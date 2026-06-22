@@ -11,6 +11,7 @@ import fs from "fs";
 import path from "path";
 import clerkWebhook from "./webhooks/clerk.webhook.js";
 import job from "./lib/cron.js";
+import authRoutes from "./routes/auth.route.js";
 dotenv.config();
 
 
