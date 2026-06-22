@@ -1,6 +1,7 @@
 // const express = require("express");
 import express from "express";
 import dotenv from "dotenv";
+dotenv.config();
 import User from "./models/user.model.js";
 import Message from "./models/message.model.js";
 import connectDB from "./lib/db.js";
@@ -13,13 +14,13 @@ import clerkWebhook from "./webhooks/clerk.webhook.js";
 import job from "./lib/cron.js";
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
-import { sendMessage } from "./controllers/message.controller.js";
-dotenv.config();
+import {server, app} from "./lib/socket.js";
+
 
 
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
-const app = express();
+// const app = express();
 const PORT = process.env.PORT;
 const FRONTEND_URL = process.env.FRONTEND_URL;
 
@@ -47,7 +48,7 @@ if(fs.existsSync(publicDir)) {
 }
 
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   connectDB();
   console.log(`Server is running on port ${PORT}`);
 
