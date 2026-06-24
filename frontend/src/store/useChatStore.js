@@ -80,20 +80,20 @@ export const useChatStore = create(
         }
       },
 
-      subscribeToMessages: (userId) => {
-        if (!userId) return;
-
+      subscribeToMessages: () => {
         const socket = useAuthStore.getState().socket;
         if (!socket) return;
 
         socket.off("newMessage");
         socket.on("newMessage", (newMessage) => {
-          // if im not the receiver don't do anything just return
-          if (String(newMessage.senderId) !== String(userId)) return;
-
-          set({ messages: [...get().messages, newMessage] });
-
+          // Always refresh conversations list so the sidebar updates in real-time
           get().getConversations();
+
+          // If the message is from the active conversation partner, append it to messages
+          const activeId = get().activeConversationId;
+          if (activeId && String(newMessage.senderId) === String(activeId)) {
+            set({ messages: [...get().messages, newMessage] });
+          }
         });
       },
 

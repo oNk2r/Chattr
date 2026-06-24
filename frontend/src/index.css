@@ -36,21 +36,31 @@
   }
 }
 
-@keyframes auth-float-y {
-  0%,
-  100% {
-    transform: translateY(0);
+@theme {
+  --animate-auth-float-y: auth-float-y 4.5s ease-in-out infinite;
+  --animate-auth-shimmer: auth-shimmer 2.5s infinite linear;
+
+  @keyframes auth-float-y {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
   }
-  50% {
-    transform: translateY(-12px);
+
+  @keyframes auth-shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
   }
 }
 
-@keyframes auth-shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
+/* Enforce fixed text boxes and hide the manual resize handle on all textareas */
+textarea {
+  resize: none !important;
 }

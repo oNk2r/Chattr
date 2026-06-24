@@ -5,7 +5,7 @@ const PageLoader = () => {
   return (
     <div className="flex h-dvh items-center justify-center bg-background text-foreground">
       <div className="flex flex-col items-center gap-4">
-        <AppLogo size={44} className="rounded-xl" />
+        <AppLogo size={56} className="size-14 rounded-2xl" />
 
         <div className="flex items-center gap-2 text-sm font-medium text-muted">
           <LoaderIcon className="size-4 animate-spin text-accent" aria-hidden />

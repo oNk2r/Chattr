@@ -9,10 +9,10 @@ const heroPanelClassName = [
 ].join(" ");
 
 const heroImageClassName = [
-  "h-auto max-h-[min(44vh,380px)] w-[min(92%,19rem)]",
-  "animate-[auth-float-y_4.5s_ease-in-out_infinite]",
+  "h-auto max-h-[min(50vh,440px)] w-[min(95%,23rem)]",
+  "animate-auth-float-y",
   "object-contain object-center select-none motion-reduce:animate-none",
-  "sm:w-[min(88%,21rem)] md:max-h-[min(52vh,440px)] md:w-[min(90%,22rem)]",
+  "sm:w-[min(92%,26rem)] md:max-h-[min(60vh,520px)] md:w-[min(92%,28rem)]",
 ].join(" ");
 
 export function AuthHeroPanel() {

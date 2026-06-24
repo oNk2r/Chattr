@@ -7,11 +7,12 @@ import { useAuth } from "@clerk/react";
 import PageLoader from "./components/PageLoader";
 import { useAuthStore } from "./store/useAuthStore";
 import { useEffect } from "react";
+import { setTokenGetter } from "./lib/axios";
 
 import { Toaster } from "react-hot-toast";
 
 function App() {
-  const { isSignedIn, isLoaded } = useAuth();
+  const { isSignedIn, isLoaded, getToken } = useAuth();
 
   // option 1
   // const { checkAuth, isCheckingAuth, clearAuth } = useAuthStore();
@@ -20,6 +21,12 @@ function App() {
   const clearAuth = useAuthStore((state) => state.clearAuth);
   const checkAuth = useAuthStore((state) => state.checkAuth);
   const isCheckingAuth = useAuthStore((state) => state.isCheckingAuth);
+
+  useEffect(() => {
+    if (isLoaded) {
+      setTokenGetter(getToken);
+    }
+  }, [isLoaded, getToken]);
 
   useEffect(() => {
     if (!isLoaded) return;

@@ -1,7 +1,9 @@
 import "dotenv/config";
+import dns from "dns";
+dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 import mongoose from "mongoose";
-import { connectDB } from "../lib/db.js";
+import connectDB from "../lib/db.js";
 import User from "../models/user.model.js";
 
 const seedUsers = [

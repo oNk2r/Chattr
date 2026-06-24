@@ -61,7 +61,7 @@ export function ChatHeader() {
         </>
       ) : (
         <div className="flex flex-1 items-center gap-2.5 sm:text-left">
-          <AppLogo size={36} className="rounded-[9px]" />
+          <AppLogo size={44} className="size-11 rounded-[11px]" />
           <div className="flex-1 text-center sm:text-left">
             <p className="truncate text-[13px] font-medium text-muted">Select a conversation</p>
           </div>
