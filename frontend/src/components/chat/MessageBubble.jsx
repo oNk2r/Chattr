@@ -22,7 +22,7 @@ export function MessageBubble({ message }) {
           <img
             src={withTransform(message.imageUrl, IMAGE_TRANSFORM)}
             alt=""
-            className="mb-1.5 max-h-40 max-w-full rounded-lg object-cover sm:max-h-52 sm:rounded-xl"
+            className="mb-1.5 w-full h-auto max-h-40 rounded-lg object-cover sm:max-h-52 sm:rounded-xl"
           />
         ) : null}
         {hasVideo ? <MessageVideo src={message.videoUrl} /> : null}

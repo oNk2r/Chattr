@@ -26,7 +26,7 @@ export function MessageVideo({ src }) {
       controls
       playsInline
       preload="metadata"
-      className="mb-1.5 max-h-52 max-w-full rounded-lg object-contain sm:max-h-64 sm:rounded-xl"
+      className="mb-1.5 w-full h-auto max-h-52 rounded-lg object-contain sm:max-h-64 sm:rounded-xl"
     />
   );
 }

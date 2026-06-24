@@ -1,7 +1,16 @@
 import axios from "axios";
 
+const getBaseUrl = () => {
+  if (import.meta.env.MODE === "development") {
+    const protocol = window.location.protocol;
+    const hostname = window.location.hostname;
+    return `${protocol}//${hostname}:3000/api`;
+  }
+  return "/api";
+};
+
 export const axiosInstance = axios.create({
-  baseURL: import.meta.env.MODE === "development" ? "http://localhost:3000/api" : "/api",
+  baseURL: getBaseUrl(),
   withCredentials: true,
 });
 

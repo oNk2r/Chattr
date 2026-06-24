@@ -7,7 +7,8 @@
     "dev": "nodemon src/index.js",
     "build": "rm -rf dist && cp -R src dist",
     "start": "node src/index.js",
-    "db:seed": "node src/seeds/user.seed.js"
+    "db:seed": "node src/seeds/user.seed.js",
+    "db:clear": "node src/seeds/user.clear.js"
   },
   "keywords": [],
   "author": "",
