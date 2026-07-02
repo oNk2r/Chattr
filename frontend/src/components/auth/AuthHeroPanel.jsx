@@ -1,8 +1,9 @@
+import { useRef } from "react";
 import { APP_NAME } from "../AppLogo";
 import { AuthHeroPattern } from "./AuthHeroPattern";
 
 const heroPanelClassName = [
-  "relative flex min-h-[min(320px,42vh)] shrink-0 flex-col overflow-hidden",
+  "group relative flex min-h-[min(320px,42vh)] shrink-0 flex-col overflow-hidden",
   "bg-[#E8E8ED] dark:bg-black",
   "md:w-[44%] md:max-w-xl md:border-r md:border-black/10 dark:md:border-white/10",
   "lg:w-[42%] lg:max-w-none",
@@ -16,8 +17,53 @@ const heroImageClassName = [
 ].join(" ");
 
 export function AuthHeroPanel() {
+  const panelRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    if (!panelRef.current) return;
+    const rect = panelRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    // Determine movement direction relative to previous position
+    let flip = -1;
+    if (panelRef.current.lastX !== undefined) {
+      if (x < panelRef.current.lastX - 1) {
+        flip = -1; // Moving left, face left (scaleX(-1))
+      } else if (x > panelRef.current.lastX + 1) {
+        flip = 1;  // Moving right, face right (scaleX(1))
+      } else {
+        flip = panelRef.current.lastFlip || -1;
+      }
+    }
+    panelRef.current.lastX = x;
+    panelRef.current.lastFlip = flip;
+
+    panelRef.current.style.setProperty("--mouse-x", `${x}px`);
+    panelRef.current.style.setProperty("--mouse-y", `${y}px`);
+    panelRef.current.style.setProperty("--cat-flip", `${flip}`);
+  };
+
+  const handleMouseLeave = () => {
+    if (!panelRef.current) return;
+    panelRef.current.style.setProperty("--mouse-x", "88%");
+    panelRef.current.style.setProperty("--mouse-y", "85%");
+    panelRef.current.style.setProperty("--cat-flip", "-1");
+    panelRef.current.lastFlip = -1;
+  };
+
   return (
-    <section className={heroPanelClassName}>
+    <section
+      ref={panelRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className={heroPanelClassName}
+      style={{
+        "--mouse-x": "88%",
+        "--mouse-y": "85%",
+        "--cat-flip": "-1",
+      }}
+    >
       <AuthHeroPattern />
 
       <div className="relative z-1 flex flex-1 flex-col px-6 pb-6 pt-8 md:px-8 md:pb-8 md:pt-10">

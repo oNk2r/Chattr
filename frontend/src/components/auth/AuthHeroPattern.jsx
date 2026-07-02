@@ -1,3 +1,5 @@
+import { Cat } from "lucide-react";
+
 const gridStyle = (color) => ({
   backgroundImage: [
     `linear-gradient(${color} 1px, transparent 1px)`,
@@ -12,6 +14,31 @@ const darkGridMask =
 export function AuthHeroPattern() {
   return (
     <>
+      {/* Chasing Cat element */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 transition-[left,top] duration-500 ease-out z-10"
+        style={{
+          left: "var(--mouse-x)",
+          top: "var(--mouse-y)",
+        }}
+      >
+        <div
+          className="relative transition-transform duration-300 ease-out"
+          style={{
+            transform: `scaleX(var(--cat-flip, -1))`,
+          }}
+        >
+          <Cat className="size-9 text-amber-500 dark:text-amber-400 drop-shadow-[0_2px_8px_rgba(245,158,11,0.4)]" />
+        </div>
+
+        {/* Speech Bubble */}
+        <div className="absolute -top-7 -right-3 rounded-lg bg-zinc-900/90 dark:bg-zinc-800/90 px-1.5 py-0.5 text-[9px] font-semibold text-white shadow-md backdrop-blur-xs transition-opacity duration-300">
+          <span className="hidden group-hover:inline">meow!</span>
+          <span className="inline group-hover:hidden">zZz</span>
+        </div>
+      </div>
+
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 hidden bg-[radial-gradient(ellipse_90%_70%_at_50%_40%,rgba(0,122,255,0.2),transparent_62%)] dark:block"
