@@ -1,4 +1,4 @@
-import { Cat } from "lucide-react";
+import { Butterfly } from "./Butterfly";
 
 const gridStyle = (color) => ({
   backgroundImage: [
@@ -14,7 +14,7 @@ const darkGridMask =
 export function AuthHeroPattern() {
   return (
     <>
-      {/* Chasing Cat element */}
+      {/* Chasing Butterfly element */}
       <div
         aria-hidden
         className="pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 transition-[left,top] duration-500 ease-out z-10"
@@ -26,17 +26,17 @@ export function AuthHeroPattern() {
         <div
           className="relative transition-transform duration-300 ease-out"
           style={{
-            transform: `scaleX(var(--cat-flip, -1))`,
+            transform: `scaleX(var(--butterfly-flip, -1))`,
           }}
         >
-          <Cat className="size-9 text-amber-500 dark:text-amber-400 drop-shadow-[0_2px_8px_rgba(245,158,11,0.4)]" />
+          <Butterfly className="size-9 drop-shadow-[0_2px_10px_rgba(236,72,153,0.5)]" />
         </div>
 
-        {/* Speech Bubble */}
-        <div className="absolute -top-7 -right-3 rounded-lg bg-zinc-900/90 dark:bg-zinc-800/90 px-1.5 py-0.5 text-[9px] font-semibold text-white shadow-md backdrop-blur-xs transition-opacity duration-300">
-          <span className="hidden group-hover:inline">meow!</span>
-          <span className="inline group-hover:hidden">zZz</span>
-        </div>
+        {/* Speech Bubble
+        <div className="absolute top-11 -right-3 rounded-lg bg-zinc-900/90 dark:bg-zinc-800/90 px-1.5 py-0.5 text-[9px] font-semibold text-white shadow-md backdrop-blur-xs transition-opacity duration-300">
+          <span className="hidden group-hover:inline">hola!</span>
+          <span className="inline group-hover:hidden">...</span>
+        </div> */}
       </div>
 
       <div

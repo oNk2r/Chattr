@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { APP_NAME } from "../AppLogo";
 import { AuthHeroPattern } from "./AuthHeroPattern";
 
@@ -18,6 +18,16 @@ const heroImageClassName = [
 
 export function AuthHeroPanel() {
   const panelRef = useRef(null);
+  const flapTimeoutRef = useRef(null);
+
+  // Clean up timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (flapTimeoutRef.current) {
+        clearTimeout(flapTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleMouseMove = (e) => {
     if (!panelRef.current) return;
@@ -41,14 +51,31 @@ export function AuthHeroPanel() {
 
     panelRef.current.style.setProperty("--mouse-x", `${x}px`);
     panelRef.current.style.setProperty("--mouse-y", `${y}px`);
-    panelRef.current.style.setProperty("--cat-flip", `${flip}`);
+    panelRef.current.style.setProperty("--butterfly-flip", `${flip}`);
+
+    // Speed up wing flapping on mouse movement
+    panelRef.current.style.setProperty("--flap-duration", "0.08s");
+
+    if (flapTimeoutRef.current) {
+      clearTimeout(flapTimeoutRef.current);
+    }
+    flapTimeoutRef.current = setTimeout(() => {
+      if (panelRef.current) {
+        // Slow down to gentle resting flap
+        panelRef.current.style.setProperty("--flap-duration", "0.4s");
+      }
+    }, 400);
   };
 
   const handleMouseLeave = () => {
+    if (flapTimeoutRef.current) {
+      clearTimeout(flapTimeoutRef.current);
+    }
     if (!panelRef.current) return;
     panelRef.current.style.setProperty("--mouse-x", "88%");
     panelRef.current.style.setProperty("--mouse-y", "85%");
-    panelRef.current.style.setProperty("--cat-flip", "-1");
+    panelRef.current.style.setProperty("--butterfly-flip", "-1");
+    panelRef.current.style.setProperty("--flap-duration", "0.4s");
     panelRef.current.lastFlip = -1;
   };
 
@@ -61,7 +88,8 @@ export function AuthHeroPanel() {
       style={{
         "--mouse-x": "88%",
         "--mouse-y": "85%",
-        "--cat-flip": "-1",
+        "--butterfly-flip": "-1",
+        "--flap-duration": "0.4s",
       }}
     >
       <AuthHeroPattern />
